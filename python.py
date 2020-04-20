@@ -1,33 +1,15 @@
 import csv, json
 import pandas as pd
 import numpy  as np
+import urllib.request as url
 import matplotlib.pyplot as pt
 import requests
-
-
-url = requests.get('https://api.covid19india.org/raw_data.json')
-json_file = open('D:\\MCA(Hons)\\SEM-2\\Python\\covid\\raw_data.json','w')
-json_file.write(str(url.text))
-json_file.close()
-
-#to load json file into variable
-data = json.load(open('D:\\MCA(Hons)\\SEM-2\\Python\\covid\\raw_data.json'))
-
-
-#writing into cvs file
-output = csv.writer(open('D:\\MCA(Hons)\\SEM-2\\Python\\covid\\covidcsv.csv','w'))
-output.writerow(data['raw_data'][0].keys())
-for row in data['raw_data']:
-    output.writerow(row.values())
-    
-#converting cvs file to excel
-read_file = pd.read_csv (r'D:\\MCA(Hons)\\SEM-2\\Python\\covid\\covidcsv.csv',encoding="cp1252")
-read_file.to_excel (r'D:\\MCA(Hons)\\SEM-2\\Python\\covid\\covidexcel.xlsx', index = None, header=True)
+response=url.urlopen("https://api.covid19india.org/raw_data.json")
+temp_data=json.load(response)
+file=pd.DataFrame(temp_data["raw_data"])
 
 print('covid data is READY TO USE :')
 print()
-#read excel file and show it in graph
-file=pd.read_excel('D:\\MCA(Hons)\\SEM-2\\Python\\covid\\covidexcel.xlsx')
 file.fillna("undefined", inplace = True) 
 #line graph
 print('In this line graph the gender is represented:')
