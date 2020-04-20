@@ -95,8 +95,6 @@ ax = fig.add_axes([0,0,1,1])
 lab = ['0-20', '21-40', '41-60', '61-80', '81-100','Undefined']
 coviddata = [a1,a2,a3,a4,a5,un]
 pt.title("COVID_19 DATA")
-pt.xlabel("Age Bracket")
-pt.ylabel("Total number of people")
 pt.grid(True)
 ax.pie(coviddata, labels = lab,autopct='%1.2f%%')
 pt.show()
